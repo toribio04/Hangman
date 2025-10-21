@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reglas del Hangman</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .rules-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .rules-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .rules-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .rules-section h3 {
+            color: #4a5568;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .rules-section ul {
+            margin-left: 20px;
+        }
+        
+        .rules-section li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        
+        .highlight {
+            background: #667eea;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .back-btn {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .difficulty-info {
+            background: #e6fffa;
+            border: 2px solid #38b2ac;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .tips {
+            background: #fff5f5;
+            border: 2px solid #fc8181;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="rules-container">
+        <div class="rules-header">
+            <h1>📋 REGLAS DEL HANGMAN</h1>
+            <p>¡Aprende a jugar como un profesional!</p>
+        </div>
+
+        <div class="rules-section">
+            <h3>🎯 Objetivo del Juego</h3>
+            <p>El objetivo es adivinar una palabra oculta letra por letra antes de que se complete el dibujo del hangman. ¡Tienes que ser más rápido que la horca!</p>
+        </div>
+
+        <div class="rules-section">
+            <h3>🎮 Cómo Jugar</h3>
+            <ul>
+                <li><span class="highlight">Selección de palabra:</span> El juego elige una palabra aleatoria de más de 100 opciones</li>
+                <li><span class="highlight">Letra inicial:</span> Comienzas con una letra que ya está revelada</li>
+                <li><span class="highlight">Adivinar letras:</span> Escribe una letra que creas que está en la palabra</li>
+                <li><span class="highlight">Intentos limitados:</span> Tienes exactamente <strong>6 intentos</strong> para adivinar la palabra</li>
+                <li><span class="highlight">Pistas:</span> Cada palabra tiene una pista relacionada para ayudarte</li>
+            </ul>
+        </div>
+
+        <div class="rules-section">
+            <h3>⚡ Sistema de Puntuación</h3>
+            <ul>
+                <li><span class="highlight">Racha de victorias:</span> Se guarda tu mejor racha consecutiva</li>
+                <li><span class="highlight">Letras correctas:</span> Cada letra correcta te acerca a la victoria</li>
+                <li><span class="highlight">Letras incorrectas:</span> Cada error te acerca al game over</li>
+                <li><span class="highlight">Reinicio:</span> Puedes empezar un nuevo juego en cualquier momento</li>
+            </ul>
+        </div>
+
+        <div class="difficulty-info">
+            <h3>💡 Consejos para Ganar</h3>
+            <ul>
+                <li><strong>Usa las pistas:</strong> Cada palabra tiene una pista que te da contexto</li>
+                <li><strong>Piensa en vocales:</strong> Las vocales (A, E, I, O, U) son muy comunes</li>
+                <li><strong>Letras frecuentes:</strong> R, S, T, L, N son letras que aparecen mucho en español</li>
+                <li><strong>Observa el patrón:</strong> Si ves "_ A _ A", podría ser "CASA" o "MAMA"</li>
+                <li><strong>No te desesperes:</strong> ¡Tienes 6 intentos, úsalos sabiamente!</li>
+            </ul>
+        </div>
+
+        <div class="rules-section">
+            <h3>🎨 Elementos Visuales</h3>
+            <ul>
+                <li><span class="highlight">Dibujo del hangman:</span> Se completa progresivamente con cada error</li>
+                <li><span class="highlight">Letras usadas:</span> Se muestran todas las letras que ya probaste</li>
+                <li><span class="highlight">Intentos restantes:</span> Contador que te dice cuántos errores te quedan</li>
+                <li><span class="highlight">Palabra oculta:</span> Guiones bajos (_) representan letras no adivinadas</li>
+            </ul>
+        </div>
+
+        <div class="tips">
+            <h3>🚨 Estados del Juego</h3>
+            <ul>
+                <li><strong>🟢 Victoria:</strong> Adivinas todas las letras antes de agotar los intentos</li>
+                <li><strong>🔴 Derrota:</strong> Se completa el dibujo del hangman (6 errores)</li>
+                <li><strong>🔄 Reinicio:</strong> Puedes jugar infinitas veces y mejorar tu racha</li>
+            </ul>
+        </div>
+
+        <div class="rules-section">
+            <h3>📚 Categorías de Palabras</h3>
+            <p>El juego incluye más de 100 palabras de diferentes categorías:</p>
+            <ul>
+                <li>🏠 <strong>Objetos cotidianos:</strong> mesa, silla, computadora, celular</li>
+                <li>🐾 <strong>Animales:</strong> perro, gato, elefante, laucha</li>
+                <li>🍎 <strong>Comida:</strong> pizza, hamburguesa, ensalada, gordo</li>
+                <li>🎵 <strong>Música:</strong> guitarra, piano, canción, melodía</li>
+                <li>⚽ <strong>Deportes:</strong> futbol, tenis, natación, ciclismo</li>
+                <li>🌍 <strong>Lugares:</strong> playa, montaña, ciudad, pueblo</li>
+                <li>👨‍💼 <strong>Profesiones:</strong> doctor, maestro, cocinero, artista</li>
+                <li>🎨 <strong>Arte:</strong> pintura, escultura, dibujo, color</li>
+            </ul>
+        </div>
+
+        <div class="back-btn">
+            <button class="btn" onclick="window.location.href='index.html'">🏠 Volver al Juego</button>
+        </div>
+    </div>
+</body>
+</html>
+

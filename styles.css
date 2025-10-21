@@ -1,0 +1,202 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+}
+
+.container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    padding: 30px;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+}
+
+h1 {
+    color: #4a5568;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.game-info {
+    background: #f7fafc;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px 0;
+    border-left: 4px solid #667eea;
+}
+
+.word-display {
+    font-size: 2em;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    color: #2d3748;
+    margin: 20px 0;
+    min-height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hangman-container {
+    margin: 20px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 1.2em;
+    line-height: 1.4;
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    border: 2px solid #e2e8f0;
+}
+
+.hangman-display {
+    white-space: pre;
+    text-align: left;
+    display: inline-block;
+}
+
+.incorrect-letters {
+    color: #e53e3e;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.attempts {
+    color: #d69e2e;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.input-section {
+    margin: 20px 0;
+}
+
+.letter-input {
+    font-size: 1.5em;
+    padding: 10px;
+    width: 60px;
+    text-align: center;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.letter-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.btn:disabled {
+    background: #a0aec0;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.message {
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-weight: bold;
+}
+
+.success {
+    background: #c6f6d5;
+    color: #22543d;
+    border: 2px solid #68d391;
+}
+
+.error {
+    background: #fed7d7;
+    color: #742a2a;
+    border: 2px solid #fc8181;
+}
+
+.info {
+    background: #bee3f8;
+    color: #2a4365;
+    border: 2px solid #63b3ed;
+}
+
+.game-over {
+    background: #fed7d7;
+    color: #742a2a;
+    border: 2px solid #fc8181;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.victory {
+    background: #c6f6d5;
+    color: #22543d;
+    border: 2px solid #68d391;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.used-letters {
+    margin: 15px 0;
+    font-size: 1.1em;
+}
+
+.correct-letters {
+    color: #38a169;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+    
+    .word-display {
+        font-size: 1.5em;
+    }
+}
+
+

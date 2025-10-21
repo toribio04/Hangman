@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego del Hangman</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 JUEGO DEL HANGMAN 🎮</h1>
+        
+        <div id="welcome-section" class="game-info">
+            <p>¡Bienvenido al juego del hangman!</p>
+            <p>Adivina la palabra letra por letra.</p>
+            <p>¡Tienes 6 intentos para salvar al hangman!</p>
+            <p><strong>Racha actual: <span id="current-streak">0</span> victorias</strong></p>
+            <button class="btn" onclick="startGame()">¡Comenzar Juego!</button>
+            <button class="btn" onclick="window.location.href='rules.html'">📋 Ver Reglas</button>
+        </div>
+
+        <div id="game-section" class="hidden">
+            <div id="game-info" class="game-info">
+                <p><strong>Pista:</strong> <span id="word-hint"></span></p>
+                <p>La palabra tiene <span id="word-length">0</span> letras</p>
+                <p>Empiezas con la letra: '<span id="initial-letter"></span>'</p>
+                <p><strong>Racha: <span id="game-streak">0</span> victorias</strong></p>
+            </div>
+
+            <div id="word-display" class="word-display"></div>
+
+            <div id="hangman-container" class="hangman-container">
+                <div id="hangman-display" class="hangman-display"></div>
+            </div>
+
+            <div id="incorrect-letters" class="incorrect-letters"></div>
+            <div id="attempts" class="attempts"></div>
+
+            <div class="input-section">
+                <input type="text" id="letter-input" class="letter-input" maxlength="1" placeholder="A">
+                <br>
+                <button class="btn" onclick="guessLetter()">Adivinar Letra</button>
+                <button class="btn" onclick="newGame()">Nuevo Juego</button>
+            </div>
+
+            <div id="used-letters" class="used-letters"></div>
+            <div id="message"></div>
+        </div>
+
+        <div id="game-over-section" class="hidden">
+            <div id="game-over-message"></div>
+            <button class="btn" onclick="newGame()">Jugar de Nuevo</button>
+            <button class="btn" onclick="location.reload()">Salir</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
