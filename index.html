@@ -17,6 +17,7 @@
             <p><strong>Racha actual: <span id="current-streak">0</span> victorias</strong></p>
             <button class="btn" onclick="startGame()">¡Comenzar Juego!</button>
             <button class="btn" onclick="window.location.href='rules.html'">📋 Ver Reglas</button>
+            <button class="btn whatsapp-btn" onclick="compartirWhatsApp()">📱 Compartir en WhatsApp</button>
         </div>
 
         <div id="game-section" class="hidden">
@@ -41,6 +42,7 @@
                 <br>
                 <button class="btn" onclick="guessLetter()">Adivinar Letra</button>
                 <button class="btn" onclick="newGame()">Nuevo Juego</button>
+                <button class="btn whatsapp-btn" onclick="compartirWhatsApp()">📱 Compartir</button>
             </div>
 
             <div id="used-letters" class="used-letters"></div>
@@ -51,6 +53,7 @@
             <div id="game-over-message"></div>
             <button class="btn" onclick="newGame()">Jugar de Nuevo</button>
             <button class="btn" onclick="location.reload()">Salir</button>
+            <button class="btn whatsapp-btn" onclick="compartirWhatsApp()">📱 Compartir</button>
         </div>
     </div>
 

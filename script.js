@@ -301,6 +301,7 @@ function verificarEstadoJuego() {
             '<h2>¡FELICIDADES! ¡GANASTE!</h2>' +
             `<p>La palabra era: <strong>${palabraActual.toUpperCase()}</strong></p>` +
             `<p><strong>¡Nueva racha: ${rachaActual} victorias!</strong></p>` +
+            '<button class="btn whatsapp-btn" onclick="compartirResultado(\'victoria\', \'' + palabraActual + '\')">📱 Compartir Victoria</button>' +
             '</div>';
         return true;
     }
@@ -315,6 +316,7 @@ function verificarEstadoJuego() {
             '<h2>¡GAME OVER!</h2>' +
             `<p>La palabra era: <strong>${palabraActual.toUpperCase()}</strong></p>` +
             '<p><strong>Racha reiniciada a 0</strong></p>' +
+            '<button class="btn whatsapp-btn" onclick="compartirResultado(\'derrota\', \'' + palabraActual + '\')">📱 Compartir Resultado</button>' +
             '</div>';
         return true;
     }
@@ -402,6 +404,91 @@ document.getElementById('letter-input').addEventListener('input', function(e) {
     // Convertir a mayúscula automáticamente
     e.target.value = e.target.value.toUpperCase();
 });
+
+// Función para compartir en WhatsApp
+function compartirWhatsApp() {
+    // Detectar si es móvil o escritorio
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // Crear mensaje personalizado según el estado del juego
+    let mensaje = "";
+    let url = "";
+    
+    // Determinar el mensaje según el contexto
+    if (rachaActual > 0) {
+        mensaje = `🎮 ¡Mira mi racha en el Hangman! 🎮\n\n` +
+                 `¡He ganado ${rachaActual} veces seguidas! 🏆\n\n` +
+                 `¿Puedes superar mi racha? ¡Juega y compárteme tu puntuación! 💪\n\n` +
+                 `🎯 Reglas del juego:\n` +
+                 `• Adivina la palabra letra por letra\n` +
+                 `• Tienes 6 intentos para salvar al hangman\n` +
+                 `• Cada palabra tiene una pista útil\n` +
+                 `• ¡Mantén tu racha de victorias!\n\n` +
+                 `¡Descarga el juego y compite conmigo! 🚀`;
+    } else {
+        mensaje = `🎮 ¡Descubre este increíble juego de Hangman! 🎮\n\n` +
+                 `🎯 Características:\n` +
+                 `• Más de 100 palabras con pistas\n` +
+                 `• Sistema de rachas de victorias\n` +
+                 `• Interfaz moderna y divertida\n` +
+                 `• Funciona en móvil y computadora\n\n` +
+                 `🎮 Reglas:\n` +
+                 `• Adivina la palabra letra por letra\n` +
+                 `• Tienes 6 intentos para salvar al hangman\n` +
+                 `• Cada palabra tiene una pista útil\n` +
+                 `• ¡Mantén tu racha de victorias!\n\n` +
+                 `¡Juega y compárteme tu mejor racha! 🏆`;
+    }
+    
+    // Codificar el mensaje para URL
+    const mensajeCodificado = encodeURIComponent(mensaje);
+    
+    // Crear URL de WhatsApp
+    if (isMobile) {
+        // Para móviles: usar la app de WhatsApp
+        url = `whatsapp://send?text=${mensajeCodificado}`;
+    } else {
+        // Para escritorio: usar WhatsApp Web
+        url = `https://web.whatsapp.com/send?text=${mensajeCodificado}`;
+    }
+    
+    // Abrir WhatsApp
+    window.open(url, '_blank');
+    
+    // Mostrar mensaje de confirmación
+    mostrarMensaje('¡WhatsApp abierto! Comparte tu racha con tus amigos 🚀', 'info');
+}
+
+// Función para compartir resultado específico del juego
+function compartirResultado(resultado, palabra) {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    let mensaje = "";
+    
+    if (resultado === 'victoria') {
+        mensaje = `🎉 ¡ACABO DE GANAR EN EL HANGMAN! 🎉\n\n` +
+                 `✅ Palabra adivinada: ${palabra.toUpperCase()}\n` +
+                 `🏆 Racha actual: ${rachaActual} victorias seguidas\n\n` +
+                 `¿Puedes superar mi racha? ¡Juega y compárteme tu puntuación! 💪\n\n` +
+                 `🎮 Descarga el juego y compite conmigo! 🚀`;
+    } else if (resultado === 'derrota') {
+        mensaje = `😅 ¡Casi gano en el Hangman! 😅\n\n` +
+                 `❌ La palabra era: ${palabra.toUpperCase()}\n` +
+                 `🔄 Racha reiniciada a 0\n\n` +
+                 `¡Ayúdame a mejorar! ¿Puedes adivinar más palabras que yo? 🤔\n\n` +
+                 `🎮 Descarga el juego y compite conmigo! 🚀`;
+    }
+    
+    const mensajeCodificado = encodeURIComponent(mensaje);
+    
+    if (isMobile) {
+        url = `whatsapp://send?text=${mensajeCodificado}`;
+    } else {
+        url = `https://web.whatsapp.com/send?text=${mensajeCodificado}`;
+    }
+    
+    window.open(url, '_blank');
+}
 
 // Inicializar la página
 document.addEventListener('DOMContentLoaded', function() {

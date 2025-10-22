@@ -127,6 +127,25 @@ h1 {
     box-shadow: none;
 }
 
+.whatsapp-btn {
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+
+.whatsapp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+    background: linear-gradient(135deg, #128c7e 0%, #25d366 100%);
+}
+
 .message {
     padding: 15px;
     border-radius: 8px;
