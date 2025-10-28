@@ -198,6 +198,43 @@ h1 {
     font-size: 1.1em;
 }
 
+/* Estilos para el abecedario */
+.alphabet {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.letter-btn {
+    background: #edf2ff;
+    color: #2d3748;
+    border: 2px solid #e2e8f0;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    min-width: 40px;
+    text-align: center;
+    transition: all 0.15s ease;
+}
+
+.letter-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: #ebf4ff;
+    border-color: #667eea;
+}
+
+.letter-btn.used,
+.letter-btn:disabled {
+    background: #e2e8f0;
+    color: #718096;
+    border-color: #cbd5e1;
+    cursor: not-allowed;
+    transform: none;
+}
+
 .correct-letters {
     color: #38a169;
     font-weight: bold;

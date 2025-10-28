@@ -348,6 +348,9 @@ function startGame() {
     document.getElementById('initial-letter').textContent = letraInicial.toUpperCase();
     
     actualizarInterfaz();
+    // Renderizar el abecedario y actualizar el estado de los botones
+    renderAlphabet();
+    updateLetterButtons();
     
     // Limpiar mensajes
     document.getElementById('message').textContent = '';
@@ -359,17 +362,29 @@ function guessLetter() {
     const input = document.getElementById('letter-input');
     let letra = input.value.toLowerCase().trim();
     
-    if (!letra || letra.length !== 1 || !letra.match(/[a-z]/)) {
+    // Usamos la nueva función processLetter para reutilizar la lógica
+    processLetter(letra);
+    input.value = '';
+}
+
+// Procesa una letra (desde input, botón o teclado)
+function processLetter(letra) {
+    // Verificar que el juego esté activo
+    if (document.getElementById('game-section').classList.contains('hidden')) return;
+
+    if (!letra || letra.length !== 1 || !letra.match(/[a-zñ]/)) {
         mostrarMensaje('Por favor, ingresa solo una letra válida.', 'error');
         return;
     }
-    
+
+    letra = letra.toLowerCase();
+
     if (letrasAdivinadas.has(letra) || letrasIncorrectas.has(letra)) {
         mostrarMensaje('Ya has usado esa letra. Intenta con otra.', 'error');
-        input.value = '';
+        updateLetterButtons();
         return;
     }
-    
+
     if (palabraActual.includes(letra)) {
         letrasAdivinadas.add(letra);
         mostrarMensaje(`¡Correcto! La letra '${letra.toUpperCase()}' está en la palabra.`, 'success');
@@ -378,14 +393,45 @@ function guessLetter() {
         intentos++;
         mostrarMensaje(`Incorrecto. La letra '${letra.toUpperCase()}' no está en la palabra.`, 'error');
     }
-    
-    input.value = '';
+
     actualizarInterfaz();
-    
+    updateLetterButtons();
+
     // Verificar si el juego terminó
     if (verificarEstadoJuego()) {
         return;
     }
+}
+
+// Renderiza el abecedario (incluye la ñ para español)
+function renderAlphabet() {
+    const container = document.getElementById('alphabet');
+    if (!container) return;
+    container.innerHTML = '';
+    const letters = 'abcdefghijklmnñopqrstuvwxyz'.split('');
+    letters.forEach(l => {
+        const btn = document.createElement('button');
+        btn.textContent = l.toUpperCase();
+        btn.className = 'letter-btn';
+        btn.setAttribute('data-letter', l);
+        btn.addEventListener('click', () => processLetter(l));
+        container.appendChild(btn);
+    });
+}
+
+// Actualiza el estado (habilitado/deshabilitado) de los botones del abecedario
+function updateLetterButtons() {
+    const buttons = document.querySelectorAll('.letter-btn');
+    buttons.forEach(btn => {
+        const l = btn.getAttribute('data-letter');
+        if (letrasAdivinadas.has(l) || letrasIncorrectas.has(l)) {
+            btn.disabled = true;
+            btn.classList.add('used');
+        } else {
+            btn.disabled = false;
+            btn.classList.remove('used');
+        }
+    });
 }
 
 // Función para nuevo juego
@@ -397,6 +443,18 @@ function newGame() {
 document.getElementById('letter-input').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
         guessLetter();
+    }
+});
+
+// Listener global del teclado para capturar letras sin necesidad de foco
+document.addEventListener('keydown', function(e) {
+    // Ignorar si no está en la sección del juego
+    if (document.getElementById('game-section').classList.contains('hidden')) return;
+
+    const key = e.key.toLowerCase();
+    // Aceptamos letras a-z y ñ
+    if (key.length === 1 && key.match(/[a-zñ]/)) {
+        processLetter(key);
     }
 });
 
